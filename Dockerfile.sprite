@@ -1,0 +1,24 @@
+# Use a modern Node image as the base
+FROM node:22-bullseye
+
+# Install basic development tools
+RUN apt-get update && apt-get install -y \
+    git \
+    tmux \
+    curl \
+    python3 \
+    python3-pip \
+    vim \
+    bash \
+    sudo \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install the Gemini CLI globally
+# We use --unsafe-perm to avoid common permission issues during global install in Docker
+RUN npm install -g @google/gemini-cli --unsafe-perm
+
+# Set up a working directory
+WORKDIR /workspace
+
+# Default command: keep the container running
+CMD ["tail", "-f", "/dev/null"]
