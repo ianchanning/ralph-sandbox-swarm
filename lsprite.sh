@@ -14,12 +14,17 @@ case "$1" in
     echo "Building $IMAGE_NAME..."
     $DOCKER_CMD build -t $IMAGE_NAME -f Dockerfile.sprite .
     ;;
-  up)
+  create|up)
     NAME=$2
     if [ -z "$NAME" ]; then echo "Usage: $0 up <name>"; exit 1; fi
-    echo "Launching sprite: $NAME"
-    # Mount current dir to /workspace inside
-    $DOCKER_CMD run -d --name "$NAME" -e SPRITE_NAME="$NAME" -v "$(pwd):/workspace" $IMAGE_NAME
+    if [ "$($DOCKER_CMD ps -a -q -f name=^/${NAME}$)" ]; then
+        echo "Sprite '$NAME' already exists. Starting it..."
+        $DOCKER_CMD start "$NAME"
+    else
+        echo "Launching sprite: $NAME"
+        # Mount current dir to /workspace inside
+        $DOCKER_CMD run -d --name "$NAME" -e SPRITE_NAME="$NAME" -v "$(pwd):/workspace" $IMAGE_NAME
+    fi
     ;;
   in)
     NAME=$2
@@ -35,7 +40,7 @@ case "$1" in
     $DOCKER_CMD ps --filter "ancestor=$IMAGE_NAME"
     ;;
   *)
-    echo "Usage: $0 {build|up|in|rm|ls}"
+    echo "Usage: $0 {build|create|up|in|rm|ls}"
     exit 1
     ;;
 esac
