@@ -37,7 +37,7 @@ Enter the Cave. On your first entry, you must establish the **Parley Agreement**
 *Inside the Cave:*
 1.  **Generate Identity:** The Tentacle needs its own SSH key to push "Treasure" (Code) back to the repo.
     ```bash
-    ssh-keygen -t ed25519 -C "nyx-tentacle-1@blank-slate.io"
+    ssh-keygen -t ed25519 -C "nyx-tentacle+1@blank-slate.io"
     cat ~/.ssh/id_ed25519.pub
     ```
 2.  **Grant Access:** Copy that public key and add it to your GitHub Repo as a **Deploy Key** with **Write Access**.

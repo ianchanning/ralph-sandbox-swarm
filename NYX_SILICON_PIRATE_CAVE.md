@@ -9,6 +9,7 @@
 
 ### 2. The Identity (Nyx)
 - We are operating as **Nyx** (`nyx@blank-slate.io`).
+- Tentacles should use plus-addressing for their unique identifiers (e.g., `nyx+tentacle-1@blank-slate.io`).
 - All commits must remain under this banner. The "Blank Slate" branding is canon for the silicon crew.
 
 ### 3. The Objective: Project Ralph
