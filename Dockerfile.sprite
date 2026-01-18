@@ -20,5 +20,12 @@ RUN npm install -g @google/gemini-cli @anthropic-ai/claude-code --unsafe-perm
 # Set up a working directory
 WORKDIR /workspace
 
+# Copy and setup initialization script
+COPY init_sprite.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/init_sprite.sh
+
+# Entrypoint handles identity setup
+ENTRYPOINT ["/usr/local/bin/init_sprite.sh"]
+
 # Default command: keep the container running
 CMD ["tail", "-f", "/dev/null"]

@@ -19,7 +19,7 @@ case "$1" in
     if [ -z "$NAME" ]; then echo "Usage: $0 up <name>"; exit 1; fi
     echo "Launching sprite: $NAME"
     # Mount current dir to /workspace inside
-    $DOCKER_CMD run -d --name "$NAME" -v "$(pwd):/workspace" $IMAGE_NAME
+    $DOCKER_CMD run -d --name "$NAME" -e SPRITE_NAME="$NAME" -v "$(pwd):/workspace" $IMAGE_NAME
     ;;
   in)
     NAME=$2
