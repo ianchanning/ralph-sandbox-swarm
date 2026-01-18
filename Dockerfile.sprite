@@ -13,9 +13,9 @@ RUN apt-get update && apt-get install -y \
     sudo \
     && rm -rf /var/lib/apt/lists/*
 
-# Install the Gemini CLI globally
+# Install the Gemini and Claude CLIs globally
 # We use --unsafe-perm to avoid common permission issues during global install in Docker
-RUN npm install -g @google/gemini-cli --unsafe-perm
+RUN npm install -g @google/gemini-cli @anthropic-ai/claude-code --unsafe-perm
 
 # Set up a working directory
 WORKDIR /workspace
