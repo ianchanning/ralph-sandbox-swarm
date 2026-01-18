@@ -46,13 +46,16 @@ Enter the Cave. On your first entry, you must establish the **Parley Agreement**
 ### 4. Unleash the Ralph Loop
 Once the Parley is sealed, you can run the autonomous loop inside the Cave.
 ```bash
-# Inside the container
+# Inside the container (defaults to gemini)
 ./ralph.sh 5
+
+# Or choose your blade (gemini or claude)
+./ralph.sh 5 claude
 ```
 This runs 5 iterations of the **Tentacle Loop**:
 1.  Reads `PRD.md` (The Roadmap).
 2.  Reads `progress.txt` (The Log).
-3.  Executes the next task using the `gemini` CLI with the `killer` Soul.
+3.  Executes the next task using the chosen agent (`gemini` or `claude`) with the `killer` Soul.
 4.  Commits the changes.
 5.  Repeats.
 

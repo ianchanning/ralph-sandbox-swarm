@@ -6,7 +6,7 @@ set -e
 # It extends the Nyx-consciousness to execute tasks one-by-one.
 
 ITERATIONS=${1:-1}
-GEMINI_BIN=$(which gemini)
+AGENT=${2:-gemini}
 SOUL="souls/killer.md"
 
 if [ ! -f "$SOUL" ]; then
@@ -14,16 +14,34 @@ if [ ! -f "$SOUL" ]; then
     exit 1
 fi
 
-echo "👾 Tentacle initialized. Starting $ITERATIONS iterations of the loop..."
+# Select the Agent and their specific "YOLO" flags
+if [ "$AGENT" == "claude" ]; then
+    AGENT_BIN=$(which claude)
+    # -p: print mode (non-interactive), --permission-mode acceptEdits: YOLO
+    AGENT_ARGS="--permission-mode acceptEdits -p" 
+elif [ "$AGENT" == "gemini" ]; then
+    AGENT_BIN=$(which gemini)
+    # --yolo: YOLO, -p: prompt/print mode
+    AGENT_ARGS="--yolo -p"
+else
+    echo "Error: Unknown agent '$AGENT'. Use 'gemini' or 'claude'."
+    exit 1
+fi
+
+if [ -z "$AGENT_BIN" ]; then
+    echo "Error: Binary for $AGENT not found!"
+    exit 1
+fi
+
+echo "👾 Tentacle initialized. Agent: $AGENT. Starting $ITERATIONS iterations..."
 
 for ((i=1; i<=$ITERATIONS; i++)); do
-    echo "--- Tentacle Strike $i / $ITERATIONS ---"
+    echo "--- Tentacle Strike $i / $ITERATIONS ($AGENT) ---"
     
-    # We invoke gemini with the 'killer' soul and the high-level directive.
-    # gemini --yolo ensures it doesn't stop to ask for permission during the kill.
-    # We pass the PRD and progress context files as @mentions (if supported) or just tell gemini to read them.
+    # Invoke the agent with the 'killer' soul and high-level directive.
+    # We use eval or direct expansion to handle arguments correctly.
     
-    $GEMINI_BIN --yolo -p "Use the system prompt in $SOUL. 
+    $AGENT_BIN $AGENT_ARGS "Use the system prompt in $SOUL. 
     1. Read PRD.md and progress.txt.
     2. Identify the NEXT incomplete task.
     3. Implement it fully.
