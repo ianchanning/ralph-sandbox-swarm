@@ -18,4 +18,7 @@ Constellation of swarms - akin to team of devs or team of teams.
 
 - [TDD - Canonical TDD](https://tidyfirst.substack.com/p/canon-tdd)
 
-you get the zoom link? Yep, need the passcode
+# Snake
+- small concrete steps
+- avoiding complexity
+- setup a separate repo for building snake-htmx
