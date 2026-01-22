@@ -13,3 +13,5 @@
 - [2026-01-18] Added `gh-key` command to `lsprite.sh` for one-shot automated deploy key addition via GitHub CLI.
 - [2026-01-18] Added automated Mothership (`sprites-swarm`) cloning to `init_sprite.sh` to ensure every Sprite has a local copy of the hive mind.
 - [2026-01-18] Documented Persistent Knowledge Setup (`docs/my-gemini-bootstrap-2.md` and `my-claude-bootstrap-2.md`).
+- [2026-01-18] Implemented Isolated Workspaces: `lsprite.sh` now creates and mounts `workspace-<name>` for each Sprite.
+- [2026-01-18] Upgraded `ralph.sh` to be location-aware, allowing it to find its 'soul' when run from `~/mothership`.
