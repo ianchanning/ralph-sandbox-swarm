@@ -21,9 +21,16 @@ case "$1" in
         echo "Sprite '$NAME' already exists. Starting it..."
         $DOCKER_CMD start "$NAME"
     else
+        # Create a dedicated workspace for this sprite
+        WORKSPACE_DIR="$(pwd)/workspace-$NAME"
+        if [ ! -d "$WORKSPACE_DIR" ]; then
+            echo "Creating workspace: $WORKSPACE_DIR"
+            mkdir -p "$WORKSPACE_DIR"
+        fi
+        
         echo "Launching sprite: $NAME"
-        # Mount current dir to /workspace inside
-        $DOCKER_CMD run -d --name "$NAME" -e SPRITE_NAME="$NAME" -v "$(pwd):/workspace" $IMAGE_NAME
+        # Mount the dedicated workspace to /workspace
+        $DOCKER_CMD run -d --name "$NAME" -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" $IMAGE_NAME
     fi
     ;;
   in)

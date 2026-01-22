@@ -7,10 +7,18 @@ set -e
 
 ITERATIONS=${1:-1}
 AGENT=${2:-gemini}
-SOUL="souls/killer.md"
 
-if [ ! -f "$SOUL" ]; then
-    echo "Error: Soul file '$SOUL' not found. Forge it first!"
+# Locate the Soul: Prefer local, fallback to script directory (Mothership)
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SOUL_LOCAL="souls/killer.md"
+SOUL_MOTHERSHIP="$SCRIPT_DIR/souls/killer.md"
+
+if [ -f "$SOUL_LOCAL" ]; then
+    SOUL="$SOUL_LOCAL"
+elif [ -f "$SOUL_MOTHERSHIP" ]; then
+    SOUL="$SOUL_MOTHERSHIP"
+else
+    echo "Error: Soul file 'killer.md' not found in local 'souls/' or '$SCRIPT_DIR/souls/'."
     exit 1
 fi
 
