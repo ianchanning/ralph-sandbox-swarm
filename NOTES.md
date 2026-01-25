@@ -22,3 +22,12 @@ Constellation of swarms - akin to team of devs or team of teams.
 - small concrete steps
 - avoiding complexity
 - setup a separate repo for building snake-htmx
+
+# 2025-01-25
+
+- get ralph loop running
+- ralph loop to get a kanban board working
+- also figure out the process for creating a PRD.md file
+- Huntley got claude to interview him to ask about the details of the project
+- rename docs -> references
+- include the transcript from huntley 1st priciples video as a basis
