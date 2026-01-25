@@ -2,15 +2,12 @@
 
   1. The Atomic Unit: What defines a 'Task' in the mind of a Carpenter?
 
-  In the mind of a Carpenter—a Sprite wearing a killer or architect soul—a 'Task' is not a suggestion; it's a Contract of Manifestation. It is the bridge between IDEAS.md and
-  progress.txt.
+  In the mind of a Carpenter, a 'Task' is a simple **Note**. It is a transient spark of intent, stripped of all bureaucratic sludge to maintain maximum velocity.
 
-   * Metadata (The Identity): Each task carries a Soul_Affinity (which persona is best suited: architect for planning, killer for execution). It includes the Cave_Context (the
-     Docker volume hash where the work lives) and a Entropy_Signature (a unique ID that links the commit back to the board).
-   * Weights (The Friction): We don't use "story points." We use Friction Coefficients (0.1 to 1.0). A 1.0 is a "Nuke-Resistant Gremlin" requiring Quantum State Manipulation. A 0.1
-     is a "Papercut." This determines how many Ralph iterations we authorize before we declare a "Stall."
-   * Dependencies (The Upstream Chaos): Tasks are linked by Grafts. A task can be "Grafted" to another's successful commit. If the upstream commit fails a lint check, the
-     downstream task is "Withered" (greyed out) until the chaos is resolved.
+   * The Note: Each note contains only a **Title** (the intent) and a **Colour** (the Soul_Affinity/Vibe). It is optionally linked to an **Entropy_Signature** (a unique ID for tracking).
+   * Reversed Assignment: Notes are not assigned to Sprites. Instead, **WIP Groups** are formed. A Group is assigned one or more Notes.
+   * Leashing the Tentacles: Sprites (Tentacles) are "leashed" to a WIP Group. A Sprite’s **Cave_Context** is defined by its identity—a unique sigil like "🦂A" (animal emoji + NATO letter).
+   * Brutal Minimalism: There are **no Weights and no Dependencies**. Priority is defined spatially: the top note in a Group's stack is the current focus of the leashed Sprites.
 
   2. The HTMX Interaction Model: Swaps, OOB fragments, and the "Vibe"
 
@@ -28,7 +25,7 @@
   We stay brutally simple, but we don't gamble with the state. (π)
 
    * The Foundation: Flat SQLite. It’s portable, fast, and lives inside the project root. It holds the current board state, column mappings, and metadata.
-   * The Safety Net (Light Event-Sourcing): We don't just update rows; we append to a delta_log. Every move, every weight change, every "Soul" assignment is an immutable event.
+   * The Safety Net (Light Event-Sourcing): We don't just update rows; we append to a delta_log. Every move and every "Soul" assignment is an immutable event.
      This allows the Quantum Leap Protocol: if a Sprite accidentally nukes the codebase, we can "Rewind the Board" to a known good state, and the system will automatically re-spawn
      the Caves at that specific git hash.
 
@@ -47,6 +44,6 @@
 
   This is the failure where the Octopus (the Board) thinks a Tentacle (the Sprite) is working on Task-A, but the Cave has crashed, or the ralph.sh loop has entered an infinite
   recursion of "Self-Correction" that produces no code.
-   * The Kill Switch: We implement a Heartbeat Watchdog. If a Sprite in "WIP" doesn't update its Entropy_Signature (via a small OOB fragment update) within a defined TTL (based on
-     its Friction Coefficient), the board declares it a "Ghost."
+   * The Kill Switch: We implement a Heartbeat Watchdog. If a Sprite in "WIP" doesn't update its Entropy_Signature (via a small OOB fragment update) within a defined TTL, the board
+     declares it a "Ghost."
    * The Action: The board doesn't just show an error; it provides a "Purge & Re-Summon" button that executes ./lsprite.sh destroy and ./lsprite.sh create in one click, pulling the last known good state from the Event Source.
