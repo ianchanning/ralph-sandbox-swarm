@@ -51,7 +51,7 @@ Run the autonomous loop. Because the Sprite is isolated, you must invoke Ralph f
 # Or choose your blade
 ~/mothership/ralph.sh 5 claude
 ```
-This runs 5 iterations of the **Tentacle Loop**, reading `PRD.md` from the current directory.
+This runs 5 iterations of the **Tentacle Loop**, reading `SPEC.md` from the current directory.
 
 ## Architecture: Souls & Reapers
 
@@ -66,7 +66,7 @@ The fleet is defined by these core components:
 
 ## Key Files
 
-*   **`PRD.md`**: The Product Requirements Document. The Tentacles read this to know what to build.
+*   **`SPEC.md`**: The technical specification and requirements. The Tentacles read this to know what to build.
 *   **`progress.txt`**: The shared memory of what has been accomplished.
 *   **`IDEAS.md`**: The "Menu of Chaos" - architectural alternatives and future plans.
 *   **`NYX_SILICON_PIRATE_CAVE.md`**: The Tactical Briefing found inside every new Cave.
