@@ -15,44 +15,34 @@ The "Octopus of Chaos" is a minimalist agent-fleet architecture. The **Host (Oct
 
 ### The Bridge: `lsprite.sh`
 The primary host-side orchestrator.
-- `build`: Bakes the Docker image with automated identity scripts.
-- `create <name>`: Orchestrates `up` -> `gh-key` (Automated Zero-to-Hero).
+- `build`: Bakes the Docker image with automated identity scripts and **NPM cache-busting** for agent tools.
+- `create [name]`: Orchestrates `up` -> `gh-key`. Now supports **sequential animal-NATO naming** (e.g., `shark-alpha`, `crocodile-bravo`) if name is omitted.
 - `gh-key <name>`: Uploads Sprite's Deploy Key via `gh` CLI and clones Mothership into `~/mothership`.
 - `clone <name> <repo> [path]`: Instructs Sprite to clone a target project into its `/workspace`.
-- `rm <name>`: Deletes the container and cleans up the host's `workspace-<name>` directory.
-- `key <name>`: Extracts the public key from logs for manual entry.
+- `rm <name>`: Deletes the container and cleans up the host's `workspace-<name>` directory (Dog-fooded cleanup).
+- `ls`: Lists all Sprites belonging to the swarm.
 
 ### The Heartbeat: `ralph.sh`
 The autonomous loop running inside the Sprite.
-- **Polymorphic:** Supports Gemini and Claude (accepts agent as 2nd arg).
-- **Location-Aware:** Finds `souls/` relative to script location in `~/mothership`.
-- **YOLO Mode:** Hard-coded for speed and non-interactive strike execution.
-
-### The Initialization: `init_sprite.sh`
-The "Soul" injected at boot via Docker `ENTRYPOINT`.
-- Sets Git Identity: `nyx+<name>@blank-slate.io`.
-- Generates SSH Key: Unique per Sprite.
-- Pre-scans `github.com`: Prevents interactive fingerprint prompts.
-- Configures `safe.directory`: Grants Git access to the `/workspace` mount.
+- **Polymorphic:** Supports Gemini and Claude.
+- **Location-Aware:** Finds `souls/` relative to script location.
 
 ## 3. Operational Environment
 - **OS:** Ubuntu 22.04.
-- **Docker:** Non-sudo access enabled for user `ian`.
-- **Permissions:** If Git reports "dubious ownership," run `sudo chown -R ian:ian .` on the host.
-- **Mothership Location:** Cloned inside Sprites at `/root/mothership`.
-- **Workspaces:** Isolated host directories `workspace-<name>` mounted to `/workspace`.
+- **Naming Strategy:** Deterministic sequential NATO indexing based on existing containers.
+- **Safety:** Isolated host directories `workspace-<name>` mounted to `/workspace`.
 
 ## 4. Current State: `kanban-rust-htmx`
-- Repository `ianchanning/kanban-rust-htmx` is the target.
-- Sprite `htmx-kanban-1` (or next available) will be authorized.
-- **Next Task:** Establish the Rust project structure and unleash the Ralph loop.
+- Repository `ianchanning/kanban-rust-htmx` has been forged.
+- Swarm naming sequence reset via mass purge of test sprites.
+- **Next Task:** Initiate **Nyx Interview Protocol** in a fresh context to generate `SPEC.md` and `IMPLEMENTATION_PLAN.md` for the Kanban forge.
 
 ## 5. Reference Material
 See the `references/` directory for:
+- `The Ralph Wiggum Loop from 1st principles...`: The blueprint for autonomous development.
 - `Getting Started With Ralph.md`: Loop theory.
 - `my-gemini-bootstrap-2.md`: Persistent knowledge architecture.
-- `How I ACTUALLY Use Claude Code...`: Workflow insights.
 
 ---
 **NYX ENCRYPTED STATE:** `(⊕) (⇌) (⁂)`
-> "The Octopus sees through every eye. The Forge is hot."
+> "The Octopus sees through every eye. The Forge is ready for the clay."
