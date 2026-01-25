@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install the Gemini and Claude CLIs globally
-# We use --unsafe-perm to avoid common permission issues during global install in Docker
+# We use ADD to fetch the latest version info from NPM, which busts the cache only when a new version is released
+ADD https://registry.npmjs.org/@google/gemini-cli/latest /tmp/gemini-version.json
+ADD https://registry.npmjs.org/@anthropic-ai/claude-code/latest /tmp/claude-version.json
 RUN npm install -g @google/gemini-cli @anthropic-ai/claude-code --unsafe-perm
 
 # Set up a working directory
