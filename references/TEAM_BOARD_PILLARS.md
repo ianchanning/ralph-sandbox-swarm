@@ -22,7 +22,7 @@
 
   3. Persistence & Safety: SQLite + 'The Safety Net'
 
-  We stay brutally simple, but we don't gamble with the state. (π)
+  We stay brutally simple, but we don't gamble with the state.
 
    * The Foundation: Flat SQLite. It’s portable, fast, and lives inside the project root. It holds the current board state, column mappings, and metadata.
    * The Safety Net (Light Event-Sourcing): We don't just update rows; we append to a delta_log. Every move and every "Soul" assignment is an immutable event.
@@ -31,16 +31,14 @@
 
   4. The 'Carpenter' Aesthetic: Gritty, Reactive, Brutalist
 
-  Forget the rounded corners and pastel blues of Trello. We are Pirates in a Silicon Cave.
+  The aesthetic is functional, precise, and unapologetically clean. It prioritizes the clarity of a mission-critical environment.
 
    * Three Vibe Keywords: RUGGED, KINETIC, UNFILTERED.
-   * The Visual Soul: Terminal-Infused Trello. Imagine the 1980s "Green Screen" aesthetic meets modern CSS Grid. High-contrast borders (the "Silicon Pirate" neon green on deep
-     charcoal), monospace fonts (JetBrains Mono or Recursive), and "Analog" indicators. The "Done" column shouldn't just be green; it should be "Burned In" to the UI. It looks like
-     a high-end industrial dashboard found in the belly of a submarine.
+   * The Visual Soul: Base Tailwind in a Submarine. A high-end industrial dashboard found in the belly of a submarine, expressed through the clean utility-first patterns of Tailwind CSS. It is a dense, high-information interface that prioritizes tactile feedback and functional purpose over decorative fluff.
 
   5. The Failure Domains: The Gremlin we kill first
 
-  The most dangerous gremlin is Ghost State (Desynchronization). (⁂)
+  The most dangerous gremlin is Ghost State (Desynchronization).
 
   This is the failure where the Octopus (the Board) thinks a Tentacle (the Sprite) is working on Task-A, but the Cave has crashed, or the ralph.sh loop has entered an infinite
   recursion of "Self-Correction" that produces no code.
