@@ -110,8 +110,9 @@ case "$1" in
     $DOCKER_CMD rm -f "$NAME"
     WORKSPACE_DIR="$(pwd)/workspace-$NAME"
     if [ -d "$WORKSPACE_DIR" ]; then
-        echo "Removing workspace: $WORKSPACE_DIR"
-        rm -rf "$WORKSPACE_DIR"
+        echo "Removing workspace (via Docker to handle root-owned files): $WORKSPACE_DIR"
+        # We use a tiny alpine container to rm the host directory since it might contain root-owned .git files
+        $DOCKER_CMD run --rm -v "$(pwd):/host" alpine rm -rf "/host/workspace-$NAME"
     fi
     ;;
   ls)
