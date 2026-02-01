@@ -24,13 +24,23 @@ Forge the base Docker image that all Sprites will use.
 ```
 
 ### 2. Summon a Cave (Sprite)
-This single command spins up an isolated container, generates a unique identity (e.g., `scorpion-alpha`), and uploads the SSH key to GitHub. If you omit the name, one will be generated for you.
+This single command spins up an isolated container, generates a unique identity (e.g., `scorpion-alpha`), and uploads the SSH key to GitHub. 
 ```bash
 ./lsprite.sh create
 ```
 *(Note the generated name in the output, e.g., "Generated Sprite Name: scorpion-alpha")*
 
-### 3. Claim a Target (Project Clone)
+### 3. Seasoning the Cave (Creating a Lair)
+If you've installed specialized tools (like Rust or Go) inside a Sprite and want to preserve that environment for future use, you can **Season** it into a **Lair**.
+```bash
+# Season 'scorpion-alpha' into a new 'rust-lair'
+./lsprite.sh season scorpion-alpha rust-lair
+
+# Later, summon a new Sprite directly into that Lair
+./lsprite.sh create rust-lair
+```
+
+### 4. Claim a Target (Project Clone)
 Tell the Sprite which repository to work on. It will clone it into the isolated workspace.
 ```bash
 ./lsprite.sh clone scorpion-alpha git@github.com:ianchanning/kanban-rust-htmx.git

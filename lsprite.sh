@@ -65,7 +65,16 @@ case "$1" in
     $DOCKER_CMD build -t $IMAGE_NAME -f Dockerfile.sprite .
     ;;
   create)
-    NAME=$2
+    # Detection logic: If $2 is an image, it's the LAIR. Otherwise, it's the NAME.
+    ARG=$2
+    if [ -n "$ARG" ] && $DOCKER_CMD image inspect "$ARG" >/dev/null 2>&1; then
+        LAIR="$ARG"
+        NAME=$3
+    else
+        LAIR="$IMAGE_NAME"
+        NAME="$ARG"
+    fi
+
     if [ -z "$NAME" ]; then
         NAME=$(generate_name)
         # Ensure name uniqueness
@@ -76,7 +85,7 @@ case "$1" in
     fi
     
     # 1. Bring up the container (low-level)
-    $0 up "$NAME"
+    $0 up "$NAME" "$LAIR"
 
     # 2. Unconditionally install the Mothership tools via HTTPS (Read-Only)
     # This avoids using the Sprite's SSH key for the Mothership, reserving it for the project repo.
@@ -85,7 +94,10 @@ case "$1" in
     ;;
   up)
     NAME=$2
-    if [ -z "$NAME" ]; then echo "Usage: $0 up <name>"; exit 1; fi
+    LAIR=$3
+    if [ -z "$NAME" ]; then echo "Usage: $0 up <name> [lair]"; exit 1; fi
+    if [ -z "$LAIR" ]; then LAIR="$IMAGE_NAME"; fi
+
     if [ "$($DOCKER_CMD ps -a -q -f name=^/${NAME}$)" ]; then
         echo "Sprite '$NAME' already exists. Starting it..."
         $DOCKER_CMD start "$NAME"
@@ -98,11 +110,20 @@ case "$1" in
             mkdir -p "$WORKSPACE_DIR"
         fi
         
-        echo "Launching sprite: $NAME"
+        echo "Launching sprite: $NAME (from lair: $LAIR)"
         # Mount the dedicated workspace to /workspace
-        $DOCKER_CMD run -d --name "$NAME" --label org.nyx.sprite=true -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" $IMAGE_NAME
+        $DOCKER_CMD run -d --name "$NAME" --label org.nyx.sprite=true -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" "$LAIR"
         inject_gemini_auth "$NAME"
     fi
+    ;;
+  season)
+    NAME=$2
+    LAIR_NAME=$3
+    if [ -z "$NAME" ] || [ -z "$LAIR_NAME" ]; then echo "Usage: $0 season <sprite_name> <lair_name>"; exit 1; fi
+    echo "Seasoning '$NAME' into a new lair: '$LAIR_NAME'..."
+    # Preserve the label so it shows up in 'ls'
+    $DOCKER_CMD commit --change 'LABEL org.nyx.sprite="true"' "$NAME" "$LAIR_NAME"
+    echo "✓ Lair '$LAIR_NAME' is ready for summoning."
     ;;
   in)
     NAME=$2
