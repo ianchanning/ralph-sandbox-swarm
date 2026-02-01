@@ -12,7 +12,7 @@ flowchart TD
 
     %% THE BRAIN (HOST SIDE)
     subgraph Host [The Octopus Host]
-        Architect[<b>The Architect</b><br/><i>Gemini 1.5 Pro / o3</i><br/>Infinite Context Strategy]:::arch
+        Architect[<b>The Architect</b><br/><i>Gemini 3 Pro / GPT 5.2</i><br/>Infinite Context Strategy]:::arch
     end
 
     %% THE BODY (DOCKER SIDE)
@@ -25,9 +25,9 @@ flowchart TD
         %% THE EXECUTION LOOP (RALPH.SH)
         subgraph RalphLoop [The Ralph Loop]
             direction TB
-            Killer[<b>The Killer</b><br/><i>Claude 3.5 Sonnet</i><br/>Vibe Coding / Execution]:::killer
+            Killer[<b>The Killer</b><br/><i>Claude 4.5 Sonnet</i><br/>Vibe Coding / Execution]:::killer
             Metal[<b>The Metal</b><br/><i>Compiler / Tests / Bash</i><br/>Reality Check]:::tool
-            Inquisitor[<b>The Inquisitor</b><br/><i>o1-mini</i><br/>Adversarial Prosecutor]:::inquisitor
+            Inquisitor[<b>The Inquisitor</b><br/><i>Gemini 3 Flash</i><br/>Adversarial Prosecutor]:::inquisitor
         end
 
         Git[(<b>Git Persistence</b><br/>Commit)]:::tool
