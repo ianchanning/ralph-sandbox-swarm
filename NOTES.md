@@ -370,3 +370,7 @@ flowchart TD
     style InnerLoop fill:none,stroke:#00cccc,stroke-width:2px,stroke-dasharray: 5 5
     style Writers fill:none,stroke:#008080,stroke-width:1px
 ```
+
+We then merged this concept with ours via Sibyl, see [references/sibyls-multi-agent-coherence.mmd](./references/sibyls-multi-agent-coherence.mmd).
+
+This was the `!DISTILL_CONTEXT` at the end of the sprites-v7 session: [contexts/ctx-001-octopus-infrastructure-hardened.md](./contexts/ctx-001-octopus-infrastructure-hardened.md)
