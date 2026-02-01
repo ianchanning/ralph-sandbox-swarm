@@ -16,7 +16,7 @@
 - Read `references/Getting Started With Ralph.md`. It’s the blueprint.
 - We are translating the Claude-centric Ralph loop into **Gemini-native bash**.
 - The `gemini` CLI is located at `/usr/local/bin/gemini`. Use it with the `--yolo` flag for autonomous iteration.
-- State is tracked in `progress.txt`. Read it before you do anything else.
+- State is tracked in `progress.txt`. **MANDATORY:** Every significant action, decision, or achievement must be recorded here. **APPEND ONLY.** Never overwrite or re-sort existing entries. Read it before you do anything else.
 
 ### 4. Current State
 - Environment: Linux (Docker-isolated).
