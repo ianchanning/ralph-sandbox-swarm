@@ -22,7 +22,7 @@ Constellation of swarms - akin to team of devs or team of teams.
 - build the tools that help us build tools
 - setup a separate repo for building kanban-rust-htmx
 
-# 2025-01-25
+# 2026-01-25
 
 - get ralph loop running
 - ralph loop to get a kanban board working
@@ -258,4 +258,115 @@ There is currently no notion of Weights or Dependencies.
   AGENT
   The pillars are now fully updated and committed to the repository.
 
+# 2026-01-31
 
+- We want a deterministic way of testing these 'souls' / 'agents'
+- Useful research paper [\[2601.14351\] If You Want Coherence, Orchestrate a Team of Rivals: Multi-Agent Models of Organizational Intelligence](https://arxiv.org/abs/2601.14351v1)
+- All of this is prompt engineering
+- Its like writing a legal document, each word in each sentence matters
+- Playing with the temperature metric
+  - Ian wary of adding in an extra dimension
+  - Darren wants to see the difference of having a more creative Coordination generating these souls
+  - Need an LLM-as-Judge to check these agents
+  - Ian noted need for 'creativity' in the judge
+  - Darren talked about having judge sub-agents and the judge then carefully balancing their output
+
+```mermaid
+flowchart TD
+
+    %% NODE DEFINITIONS
+    User([User]):::user
+    Proxy1[User Proxy]:::proxy
+    Refiner[Plan Refiner<br/>fast edits]:::planning
+    Coord1[Coordinator]:::proxy
+
+    subgraph RetrievalSection [Context & Planning]
+        direction TB
+        PrePlan[Pre Planner<br/>initial query]:::planning
+        Mem[Memory]:::white
+        Data[Data sources]:::white
+        Retrieval[Retrieval of<br/>relevant context]:::planning
+        SME[SME Consultant<br/>domain experts]:::planning
+        Planner[Planner<br/>create step-by-step plan]:::planning
+        PlanMgr[Plan Manager]:::planning
+    end
+
+    Coord2[Coordinator]:::proxy
+    OutputCrit[Output Critique<br/>validate]:::critique
+    ProxyWait[User Proxy<br/>await input]:::proxy
+    Executor[Plan Executor]:::execution
+    Router[Writer Team Router]:::execution
+    Merge[Merge Planner]:::execution
+
+    subgraph InnerLoop [Coding Inner Loop Team]
+        direction TB
+        subgraph Writers [Code Writers 20+ agents]
+            W_Py[Python Code Writer]:::planning
+            W_Snow[Snowflake Code Writer]:::planning
+            W_CSV[CSV Reader]:::planning
+            W_BQ[BigQuery Code Writer]:::planning
+            W_Ex[Excel Reader]:::planning
+            W_Dots[...]:::planning
+        end
+        
+        CodeExec[Code Executor]:::execution
+        CodeCrit[Code Critique]:::critique
+        Summarizers[Summarizers parallel<br/>Execution & Processing Summary]:::planning
+    end
+
+    %% LINK DEFINITIONS
+    User --> Proxy1
+    Proxy1 --> Refiner
+    Proxy1 <--> Coord1
+    Proxy1 --> PrePlan
+
+    Mem --> Retrieval
+    PrePlan --> Retrieval
+    Data --> Retrieval
+    
+    Retrieval -.->|optional| SME
+    Retrieval --> Planner
+    SME --> Planner
+    Planner --> PlanMgr
+    PlanMgr --> Coord2
+
+    %% The bypass from Refiner
+    Refiner -.-> Coord2
+    
+    Coord2 --> Executor
+    Coord2 <--> OutputCrit
+    Coord2 --> ProxyWait
+    %% OutputCrit -.->|if SATISFACTORY| Coord2
+    
+    
+    Executor --> Router
+    Executor --> Merge
+    %% Executor -->|self-loop| Executor
+
+    %% Inner Loop Team Links
+    Router --> W_Py
+    
+    W_Py --> CodeExec
+    W_Snow --> CodeExec
+    W_CSV --> CodeExec
+    W_BQ --> CodeExec
+    W_Ex --> CodeExec
+    W_Dots --> CodeExec
+
+    CodeExec <--> CodeCrit
+    CodeCrit --> Summarizers
+    Summarizers --> CodeExec
+
+    %% STYLE DEFINITIONS
+    classDef user fill:#e1e1e1,stroke:#666,stroke-width:1px
+    classDef proxy fill:#e1d5e7,stroke:#9673a6,stroke-width:1px
+    classDef planning fill:#dae8fc,stroke:#6c8ebf,stroke-width:1px
+    classDef execution fill:#d5e8d4,stroke:#82b366,stroke-width:1px
+    classDef critique fill:#ffe6cc,stroke:#d79b00,stroke-width:1px
+    classDef white fill:#fff,stroke:#333,stroke-width:1px
+
+    %% FINAL STYLING
+    style SME stroke-dasharray: 5 5
+    style InnerLoop fill:none,stroke:#00cccc,stroke-width:2px,stroke-dasharray: 5 5
+    style Writers fill:none,stroke:#008080,stroke-width:1px
+```
