@@ -14,7 +14,9 @@ RUN apt-get update && apt-get install -y \
     vim \
     bash \
     sudo \
+    procps \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Update npm to the latest version first
 RUN npm install -g npm@latest

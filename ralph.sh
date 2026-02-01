@@ -43,22 +43,31 @@ fi
 
 echo "👾 Tentacle initialized. Agent: $AGENT. Starting $ITERATIONS iterations..."
 
+# Read the Soul content once to pass it in the prompt
+SOUL_CONTENT=$(cat "$SOUL")
+
 for ((i=1; i<=$ITERATIONS; i++)); do
     echo "--- Tentacle Strike $i / $ITERATIONS ($AGENT) ---"
     
-    # Invoke the agent with the 'killer' soul and high-level directive.
-    # We use eval or direct expansion to handle arguments correctly.
+    # Invoke the agent with the 'killer' soul content and high-level directive.
+    # We pass the soul content directly to avoid 'read_file' path restrictions.
     
-    $AGENT_BIN $AGENT_ARGS "Use the system prompt in $SOUL. 
-    1. Read the specifications (e.g., SPEC.md or files in the specs/ directory) and progress.txt.
-    2. Identify the NEXT incomplete task from the implementation plan.
-    3. Implement it fully.
-    4. Run any necessary tests.
-    5. Update the relevant specification/plan file (mark task as done) and progress.txt (log the action).
-    6. Commit the changes with a clear message using the 'blank-slate.io' identity.
+    $AGENT_BIN $AGENT_ARGS "SYSTEM_PROMPT:
+$SOUL_CONTENT
+
+CONTEXT:
+You are working in the current directory: $(pwd)
+
+DIRECTIVE:
+1. Read the specifications (e.g., SPEC.md or files in the specs/ directory) and progress.txt.
+2. Identify the NEXT incomplete task from the implementation plan.
+3. Implement it fully.
+4. Run any necessary tests.
+5. Update the relevant specification/plan file (mark task as done) and progress.txt (log the action).
+6. Commit the changes with a clear message using the 'blank-slate.io' identity.
     
-    If all tasks in the specifications are complete, output: <promise>COMPLETE</promise>
-    Only work on ONE task per iteration."
+If all tasks in the specifications are complete, output: <promise>COMPLETE</promise>
+Only work on ONE task per iteration."
 
     # Note: In a real loop, we might want to check the stdout for the <promise>
     # but for now, we let the Tentacle run wild.
