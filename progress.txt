@@ -52,3 +52,4 @@
 - [2026-01-30] Refreshed 'README.md' to reflect the animal-NATO naming convention and the fully automated 'lsprite.sh create' workflow.
 - [2026-01-30] Optimized Mothership cloning and deploy key management: switched Mothership clone to HTTPS (Read-Only) during Sprite creation, and made 'gh-key' project-exclusive to resolve deploy key conflicts.
 
+- [2026-01-30] Forged the 'contexts/' vault and recorded 'ctx-001-octopus-infrastructure-hardened.md' as the first high-fidelity save point.
