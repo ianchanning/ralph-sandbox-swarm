@@ -17,7 +17,7 @@
 - [2026-01-18] Upgraded `ralph.sh` to be location-aware, allowing it to find its 'soul' when run from `~/mothership`.
 - [2026-01-18] Refactored `lsprite.sh`: `create` command now orchestrates the full lifecycle (up -> wait for key -> gh-key -> clone mothership).
 - [2026-01-18] Simplified `init_sprite.sh` to focus solely on identity generation, moving repository cloning to the post-authorization `gh-key` step.
-- [2026-01-18] Enhanced `lsprite.sh rm` command to automatically delete the dedicated workspace directory on the host.
+- [2026-01-18] Enhanced lsprite.sh rm command to automatically delete the dedicated workspace directory on the host.
 - [2026-01-18] Added `clone` command to `lsprite.sh` allowing Sprites to pull in target repositories for development.
 - [2026-01-18] Created `ianchanning/snake-htmx` Mothership-governed repository for the first project strike.
 - [2026-01-18] Updated `README.md` with the new streamlined workflow (build -> create -> clone -> in -> ralph).
@@ -40,6 +40,8 @@
 - [2026-01-25] Optimized 'gh-key' command to handle its own identity generation wait-loop, making it a self-contained, robust gateway for GitHub access.
 - [2026-01-25] Implemented conditional Mothership cloning in 'gh-key' to avoid "key in use" conflicts when targeting separate project repositories.
 - [2026-01-25] Optimized 'Dockerfile.sprite' for Node 24 (Bookworm Slim): integrated 'npm@latest' upgrade and removed the deprecated '--unsafe-perm' flag for a cleaner build.
+- [2026-01-30] Optimized sprite identification and filtering: added `org.nyx.sprite=true` label to `Dockerfile.sprite` and `lsprite.sh`, and updated `ls` to reliably track "legacy" sprites with untagged image IDs.
+
 
 
 

@@ -95,7 +95,7 @@ case "$1" in
         
         echo "Launching sprite: $NAME"
         # Mount the dedicated workspace to /workspace
-        $DOCKER_CMD run -d --name "$NAME" -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" $IMAGE_NAME
+        $DOCKER_CMD run -d --name "$NAME" --label org.nyx.sprite=true -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" $IMAGE_NAME
         inject_gemini_auth "$NAME"
     fi
     ;;
@@ -115,7 +115,15 @@ case "$1" in
     fi
     ;;
   ls)
-    $DOCKER_CMD ps --filter "ancestor=$IMAGE_NAME"
+    # List containers, then filter for those matching our image, label, or naming convention
+    # This ensures that even "legacy" sprites with untagged image IDs show up.
+    local HEADER=$($DOCKER_CMD ps | head -n 1)
+    local SPRITES=$($DOCKER_CMD ps | grep -E "local-sprite-base|org.nyx.sprite=true|$(echo ${ANIMALS[*]} | tr ' ' '|')" | grep -v "grep" || true)
+    
+    echo "$HEADER"
+    if [ -n "$SPRITES" ]; then
+        echo "$SPRITES"
+    fi
     ;;
   key)
     NAME=$2

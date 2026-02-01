@@ -1,6 +1,9 @@
 # Use a modern Node image as the base
 FROM node:24-bookworm-slim
 
+# Label the image for easier filtering
+LABEL org.nyx.sprite="true"
+
 # Install basic development tools
 RUN apt-get update && apt-get install -y \
     git \
