@@ -8,8 +8,22 @@ EMAIL="nyx+${SPRITE_NAME}@blank-slate.io"
 echo "👾 Initializing Sprite: $SPRITE_NAME"
 
 # 1. Configure Git Identity (Authority: The Cave Name)
-echo "   -> Setting Git Identity: $SPRITE_NAME <$EMAIL>"
-git config --global user.name "$SPRITE_NAME"
+# Transform name (e.g., "hawk-alpha") into cool identity (e.g., "🦅 A")
+ANIMAL="${SPRITE_NAME%%-*}"
+PHONETIC="${SPRITE_NAME##*-}"
+INITIAL="$(echo "${PHONETIC:0:1}" | tr '[:lower:]' '[:upper:]')"
+
+case "$ANIMAL" in
+    shark) EMOJI="🦈" ;; crocodile) EMOJI="🐊" ;; tiger) EMOJI="🐅" ;; eagle) EMOJI="🦅" ;;
+    wolf) EMOJI="🐺" ;; bear) EMOJI="🐻" ;; dragon) EMOJI="🐉" ;; octopus) EMOJI="🐙" ;;
+    viper|cobra) EMOJI="🐍" ;; raven) EMOJI="🐦" ;; panther) EMOJI="🐆" ;; hawk) EMOJI="🦅" ;;
+    orca) EMOJI="🐋" ;; lynx) EMOJI="🐱" ;; scorpion) EMOJI="🦂" ;; falcon) EMOJI="🦅" ;;
+    bull) EMOJI="🐂" ;; ram) EMOJI="🐏" ;; mantis) EMOJI="🦗" ;; *) EMOJI="🏴‍☠️" ;;
+esac
+
+GIT_NAME="$EMOJI $INITIAL"
+echo "   -> Setting Git Identity: $GIT_NAME <$EMAIL>"
+git config --global user.name "$GIT_NAME"
 git config --global user.email "$EMAIL"
 
 # 2. Grant Git access to the mounted volume
