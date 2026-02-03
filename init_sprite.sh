@@ -7,16 +7,10 @@ EMAIL="nyx+${SPRITE_NAME}@blank-slate.io"
 
 echo "👾 Initializing Sprite: $SPRITE_NAME"
 
-# 1. Configure Git Identity
-if [ -z "$(git config --global user.name)" ]; then
-    echo "   -> Setting Git Name: $SPRITE_NAME"
-    git config --global user.name "$SPRITE_NAME"
-fi
-
-if [ -z "$(git config --global user.email)" ]; then
-    echo "   -> Setting Git Email: $EMAIL"
-    git config --global user.email "$EMAIL"
-fi
+# 1. Configure Git Identity (Authority: The Cave Name)
+echo "   -> Setting Git Identity: $SPRITE_NAME <$EMAIL>"
+git config --global user.name "$SPRITE_NAME"
+git config --global user.email "$EMAIL"
 
 # 2. Grant Git access to the mounted volume
 echo "   -> Granting Git access to /workspace"

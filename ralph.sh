@@ -62,6 +62,7 @@ $SOUL_CONTENT
 
 CONTEXT:
 You are working in the current directory: $(pwd)
+Your unique Sprite identity is: ${SPRITE_NAME}
 
 DIRECTIVE:
 1. Read the specifications (e.g., SPEC.md or files in the specs/ directory) and progress.txt.
@@ -69,7 +70,8 @@ DIRECTIVE:
 3. Implement it fully.
 4. Run any necessary tests.
 5. Update the relevant specification/plan file (mark task as done) and progress.txt (log the action).
-6. Commit the changes with a clear message using the 'blank-slate.io' identity.
+6. Commit the changes with a clear message using your identity (${SPRITE_NAME}). 
+   DO NOT override the git author/email; use the system's configured identity.
     
 If all tasks in the specifications are complete, output: <promise>COMPLETE</promise>
 Only work on ONE task per iteration."
