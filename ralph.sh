@@ -29,8 +29,11 @@ if [ "$AGENT" == "claude" ]; then
     AGENT_ARGS="--permission-mode acceptEdits -p" 
 elif [ "$AGENT" == "gemini" ]; then
     AGENT_BIN=$(which gemini)
-    # --yolo: YOLO, -p: prompt/print mode
-    AGENT_ARGS="--yolo -p"
+    # Use a stable model by default to avoid 'MODEL_CAPACITY_EXHAUSTED' on preview models.
+    # Gemini 2.5 Flash is the recommended baseline for high-frequency tool loops in 2026.
+    MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
+    # --yolo: YOLO, -p: prompt/print mode, --model: specify model
+    AGENT_ARGS="--yolo -p --model $MODEL"
 else
     echo "Error: Unknown agent '$AGENT'. Use 'gemini' or 'claude'."
     exit 1
