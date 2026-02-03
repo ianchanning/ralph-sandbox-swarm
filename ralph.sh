@@ -25,15 +25,17 @@ fi
 # Select the Agent and their specific "YOLO" flags
 if [ "$AGENT" == "claude" ]; then
     AGENT_BIN=$(which claude)
-    # -p: print mode (non-interactive), --permission-mode acceptEdits: YOLO
+    # --permission-mode acceptEdits: YOLO, -p: print mode (non-interactive)
+    # Ensure -p is at the end so the prompt string follows it
     AGENT_ARGS="--permission-mode acceptEdits -p" 
 elif [ "$AGENT" == "gemini" ]; then
     AGENT_BIN=$(which gemini)
     # Use a stable model by default to avoid 'MODEL_CAPACITY_EXHAUSTED' on preview models.
     # Gemini 2.5 Flash is the recommended baseline for high-frequency tool loops in 2026.
     MODEL=${GEMINI_MODEL:-gemini-2.5-flash}
-    # --yolo: YOLO, -p: prompt/print mode, --model: specify model
-    AGENT_ARGS="--yolo -p --model $MODEL"
+    # --yolo: YOLO, --model: specify model, -p: prompt/print mode
+    # -p MUST be last so the prompt string follows it immediately
+    AGENT_ARGS="--yolo --model $MODEL -p"
 else
     echo "Error: Unknown agent '$AGENT'. Use 'gemini' or 'claude'."
     exit 1
