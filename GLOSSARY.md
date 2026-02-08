@@ -1,75 +1,59 @@
-# GLOSSARY: The Swarm Lexicon
+# GLOSSARY: System Architecture
 
-*Reforged by Sibyl & Nyx for the 'Sprites' Swarm Architecture.*
+**Industrial Grade definitions for the `sprites-swarm` infrastructure.**
 
-## I. Infrastructure (The Hardware)
+## I. Infrastructure
 
-**The Octopus**
-*   **Technical Term:** Host Machine / Orchestrator
-*   **Definition:** The physical or virtual machine running the Docker daemon. It holds the "Brain" (You + The Codebase). It is the ground truth.
-*   **Why:** It has many arms (Sprites) but one central head.
+### **The Host**
+**Your Local Machine.**
+The computer where you run the commands. It holds the source code, the credentials, and the "Brain" (You). It is the only place where persistent data is guaranteed to be safe.
 
-**The Mothership**
-*   **Technical Term:** Control Repository (`sprites-swarm`)
-*   **Definition:** The git repository containing the source code, scripts (`lsprite.sh`), and generic knowledge.
-*   **Role:** It is volume-mounted or cloned into every Sprite. It is the DNA of the swarm.
+### **The Mothership**
+**The Control Repository.**
+The `sprites-swarm` folder containing the scripts (`lsprite.sh`, `ralph.sh`) and logic. It is mounted into every container so all agents share the same tools.
 
-**The Cave**
-*   **Technical Term:** Ephemeral Docker Container
-*   **Definition:** A temporary, isolated workspace. It spins up, does work, and dies.
-*   **Attribute:** **Volatile.** If you delete a Cave, the files inside are gone (unless pushed to Git).
+### **The Sandbox**
+**The Disposable Container.**
+*(formerly "Cave")*
+A temporary, isolated environment where the agent works. It creates a safety wall between the agent's code and your Host. If the agent breaks the Sandbox, you just delete it.
 
-**The Lair**
-*   **Technical Term:** Custom Docker Image
-*   **Definition:** A "Saved Game" state. A Cave that was set up with specific tools (Rust, Python, etc.) and then committed to a Docker Image.
-*   **Usage:** Used to spawn new Caves that come pre-loaded with heavy dependencies.
+### **The Template**
+**The Saved Environment.**
+*(formerly "Lair" / Docker Image)*
+A Sandbox that has been "frozen" with specific tools installed (like Rust, Python, or Node). You use a Template to spawn new Sandboxes without having to reinstall tools every time.
 
-## II. Agency (The Software)
+## II. Agency
 
-**The Soul**
-*   **Technical Term:** System Prompt / Context File
-*   **Definition:** A text file (e.g., `souls/killer.md`) that tells the LLM who it is.
-*   **Function:** Without a Soul, the AI is a generic chatbot. With a Soul, it is a specialized worker.
+### **The Sprite**
+**The Active Worker.**
+The running combination of a **Sandbox** (Body) + **Persona** (Mind). It is the entity that actually performs the work.
 
-**The Sprite**
-*   **Technical Term:** Agent Instance
-*   **Definition:** The active combination of a **Cave** (Container) + **Soul** (Prompt) + **Ralph Loop** (Script).
-*   **Metaphor:** The ghost in the shell. The actual "worker" performing the task.
+### **The Persona**
+**The Job Description.**
+*(formerly "Soul" - stored in `souls/`)*
+A text file (e.g., `souls/architect.md`) that tells the generic AI model who it is and what its goals are. Without a Persona, the Sprite is just a chatbot.
 
-**The Sigil**
-*   **Technical Term:** Git Identity & SSH Key
-*   **Definition:** The unique cryptographic fingerprint of a Sprite. Includes its name, email, and a distinct emoji used in commit messages (e.g., 🦅 A).
-*   **Why:** Allows you to see *exactly* which agent broke the build in the git log.
+### **The Identity**
+**The Digital Fingerprint.**
+*(formerly "Sigil")*
+The Git Name, Email, and SSH Key assigned to a specific Sprite. It ensures every line of code can be traced back to the specific agent that wrote it.
 
-## III. Mechanics (The Loop)
+## III. Workflow
 
-**The Ralph Loop**
-*   **Technical Term:** Recursive Feedback Loop
-*   **Definition:** The bash script (`ralph.sh`) running inside the Sprite.
-*   **Algorithm:** Read Specs -> Write Code -> Test -> Commit -> Repeat.
-*   **Origin:** Named after Ralph Wiggum ("I'm helping!").
+### **The Loop**
+**The Heartbeat.**
+*(The `ralph.sh` script)*
+The recursive process running inside the Sprite: **Read Specs -> Write Code -> Test -> Commit.**
 
-**The Ledger**
-*   **Technical Term:** Append-Only Log (`progress.txt`)
-*   **Definition:** A text file that tracks history.
-    *   **Mothership Ledger:** Tracks the evolution of the Swarm itself.
-    *   **Project Ledger:** Tracks the feature implementation within a target repo.
-*   **Rule:** NEVER delete lines. Only add. This is the agent's memory.
+### **The Ledger**
+**The Memory.**
+*(The `progress.txt` file)*
+An append-only log file where the agent records its actions. Agents read this to understand the project history. Lines are never deleted, only added.
 
-## IV. Verbs (The Actions)
+### **Seasoning**
+**Setup.**
+The act of installing tools/dependencies inside a Sandbox to prepare it for work.
 
-**Summon**
-*   **Action:** `./lsprite.sh create` / `docker run`
-*   **Definition:** Creating a brand new, empty Cave from scratch (or from a Lair).
-
-**Season**
-*   **Action:** Shell Configuration / `apt-get install`
-*   **Definition:** The process of installing tools and dependencies inside a running Cave to make it useful for a specific tech stack.
-
-**Enshrine**
-*   **Action:** `./lsprite.sh season` / `docker commit`
-*   **Definition:** Freezing a "Seasoned" Cave into a permanent **Lair** (Image) so you don't have to reinstall tools next time.
-
-**Jack In**
-*   **Action:** `./lsprite.sh in` / `docker exec`
-*   **Definition:** Opening a shell session inside the Sprite to inspect its work or run commands manually.
+### **Enshrining**
+**Saving.**
+The command (`lsprite.sh season`) that saves a running Sandbox as a permanent **Template**.
