@@ -30,10 +30,10 @@ This single command spins up an isolated container, generates a unique **Identit
 ```
 *(Note the generated name in the output, e.g., "Generated Sprite Name: scorpion-alpha")*
 
-### 3. Seasoning the Sandbox (Creating a Template)
-If you've installed specialized tools (like Rust or Go) inside a Sandbox and want to preserve that environment for future use, you can **Enshrine** it into a **Template**.
+### 3. Setup the Sandbox (Creating a Template)
+If you've installed specialized tools (like Rust or Go) inside a Sandbox and want to preserve that environment for future use, you can **Save** it into a **Template**.
 ```bash
-# Season 'scorpion-alpha' into a new 'rust-template'
+# Setup 'scorpion-alpha' then save it into a new 'rust-template'
 ./lsprite.sh season scorpion-alpha rust-template
 
 # Later, summon a new Sandbox directly into that Template
@@ -73,7 +73,7 @@ The fleet is defined by these core components:
 ## Key Files
 
 *   **`SPEC.md` (or `specs/`)**: The technical specification and requirements. The Sprites read this to know what to build.
-*   **`progress.txt`**: The **Ledger** of what has been accomplished. **MANDATORY: APPEND ONLY.**
+*   **`progress.txt`**: **Progress**. The record of what has been accomplished. **MANDATORY: APPEND ONLY.**
 *   **`GLOSSARY.md`**: The technical definitions of the system.
 
 ## The Goal

@@ -40,20 +40,20 @@ The Git Name, Email, and SSH Key assigned to a specific Sprite. It ensures every
 
 ## III. Workflow
 
-### **The Loop**
+### **Ralph**
 **The Heartbeat.**
 *(The `ralph.sh` script)*
-The recursive process running inside the Sprite: **Read Specs -> Write Code -> Test -> Commit.**
+The recursive process running inside the Sprite: **Read Specs -> Write Code -> Test -> Commit.** It is the core concept of autonomous execution.
 
-### **The Ledger**
+### **Progress**
 **The Memory.**
-*(The `progress.txt` file)*
+*(The `progress.txt` file, formerly "The Ledger")*
 An append-only log file where the agent records its actions. Agents read this to understand the project history. Lines are never deleted, only added.
 
-### **Seasoning**
-**Setup.**
+### **Setup**
+**Seasoning.**
 The act of installing tools/dependencies inside a Sandbox to prepare it for work.
 
-### **Enshrining**
-**Saving.**
+### **Save Template**
+**Enshrining.**
 The command (`lsprite.sh season`) that saves a running Sandbox as a permanent **Template**.
