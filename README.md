@@ -56,10 +56,14 @@ Enter the Sandbox. You will land in the `/workspace` containing your cloned proj
 ```
 
 ### 6. Unleash Ralph
-Run the autonomous heartbeat. Because the Identity is isolated, you must invoke Ralph from the **Mothership** toolset.
+Run the autonomous heartbeat. Because the Identity is isolated, you must invoke Ralph from the **Mothership** toolset. Ralph supports both `gemini` (default) and `claude` CLI agents.
+
 ```bash
-# Inside the container
+# Inside the container (defaults to gemini)
 ~/mothership/ralph.sh 5
+
+# Or specify the agent
+~/mothership/ralph.sh 5 claude
 ```
 This runs 5 iterations of **Ralph**, reading `SPEC.md` or the `specs/` directory from the current directory.
 
@@ -120,7 +124,7 @@ A text file (e.g., `personas/architect.md`) that tells the generic AI model who 
 ### **Ralph**
 **The Heartbeat.**
 *(The `ralph.sh` script)*
-The recursive process running inside the Sandbox: **Read Specs -> Write Code -> Test -> Commit.** It is the core concept of autonomous execution.
+The recursive process running inside the Sandbox: **Read Specs -> Write Code -> Test -> Commit.** It is the core concept of autonomous execution. Supports `gemini` and `claude` agents.
 
 ### **Progress**
 **The Memory.**
