@@ -52,6 +52,14 @@ inject_gemini_auth() {
     fi
 }
 
+find_free_port() {
+    local PORT=3000
+    while [ -n "$($DOCKER_CMD ps --format '{{.Ports}}' | grep ":$PORT->")" ]; do
+        ((PORT++))
+    done
+    echo $PORT
+}
+
 # Auto-detect if sudo is needed for docker
 if ! docker ps >/dev/null 2>&1; then
     DOCKER_CMD="sudo docker"
@@ -114,9 +122,10 @@ case "$1" in
             mkdir -p "$WORKSPACE_DIR"
         fi
         
-        echo "Launching sprite: $NAME (from lair: $LAIR)"
-        # Mount the dedicated workspace to /workspace and expose port 3000
-        $DOCKER_CMD run -d --name "$NAME" --label org.nyx.sprite=true -p 3000:3000 -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" "$LAIR"
+        PORT=$(find_free_port)
+        echo "Launching sprite: $NAME (from lair: $LAIR) on port $PORT"
+        # Mount the dedicated workspace to /workspace and expose the allocated port
+        $DOCKER_CMD run -d --name "$NAME" --label org.nyx.sprite=true -p $PORT:3000 -e SPRITE_NAME="$NAME" -v "$WORKSPACE_DIR:/workspace" "$LAIR"
         inject_gemini_auth "$NAME"
     fi
     ;;
