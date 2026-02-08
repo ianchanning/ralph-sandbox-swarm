@@ -8,35 +8,35 @@ This repository houses the **Sprites Swarm** (aka Project Reaper), a minimalist 
 
 We reject the idea of "managing agents." Instead, we extend our consciousness.
 
-1.  **The Octopus (Host/You):** The central intelligence. You (The Dreamer) and Nyx Prime (The High Priest/Executioner) reside on the Host machine.
-2.  **The Tentacles (Agents/Reapers):** These are extensions of the Octopus. They are not separate entities; they are limbs reaching out to perform tasks.
-3.  **The Pirate Caves (Sprites):** Each Tentacle operates inside a private, isolated Docker container (a "Sprite"). This is their "Cave." It is a safe harbor where they can code, destroy, and rebuild without risking the Host.
-4.  **The Souls (Personas):** Before a Tentacle enters a Cave, it dons a "Soul" (System Prompt) that defines its behavior (e.g., `killer`, `architect`).
+1.  **The Octopus (Host):** The central intelligence. You (The Dreamer) and Nyx Prime reside on the Host machine.
+2.  **The Cave (Container):** An isolated Docker container. A safe harbor where work happens without risking the Host.
+3.  **The Sprite (Agent):** The active manifestation of a **Soul** performing work inside a **Cave**. 
+4.  **The Soul (Persona):** Before a Sprite enters a Cave, it dons a "Soul" (System Prompt) that defines its behavior (e.g., `killer`, `architect`).
 
-## Quick Start: Summoning a Tentacle
+## Quick Start: Summoning a Sprite
 
 Follow these steps to spin up your own local Silicon Pirate Cave.
 
 ### 1. Build the Golden Image
-Forge the base Docker image that all Sprites will use.
+Forge the base Docker image that all Caves will use.
 ```bash
 ./lsprite.sh build
 ```
 
 ### 2. Summon a Cave (Sprite)
-This single command spins up an isolated container, generates a unique identity (e.g., `scorpion-alpha`), and uploads the SSH key to GitHub. 
+This single command spins up an isolated container, generates a unique **Sigil** (e.g., 🦅 A), and uploads the SSH key to GitHub. 
 ```bash
 ./lsprite.sh create
 ```
 *(Note the generated name in the output, e.g., "Generated Sprite Name: scorpion-alpha")*
 
 ### 3. Seasoning the Cave (Creating a Lair)
-If you've installed specialized tools (like Rust or Go) inside a Sprite and want to preserve that environment for future use, you can **Season** it into a **Lair**.
+If you've installed specialized tools (like Rust or Go) inside a Cave and want to preserve that environment for future use, you can **Season** it into a **Lair**.
 ```bash
 # Season 'scorpion-alpha' into a new 'rust-lair'
 ./lsprite.sh season scorpion-alpha rust-lair
 
-# Later, summon a new Sprite directly into that Lair
+# Later, summon a new Cave directly into that Lair
 ./lsprite.sh create rust-lair
 ```
 
@@ -46,45 +46,40 @@ Tell the Sprite which repository to work on. It will clone it into the isolated 
 ./lsprite.sh clone scorpion-alpha git@github.com:ianchanning/kanban-rust-htmx.git
 ```
 
-### 4. Jack In (The Pirate Parley)
+### 5. Jack In (The Pirate Parley)
 Enter the Cave. You will land in the `/workspace` containing your cloned project.
 ```bash
 ./lsprite.sh in scorpion-alpha
 ```
 
-### 5. Unleash the Ralph Loop
-Run the autonomous loop. Because the Sprite is isolated, you must invoke Ralph from the Mothership toolset.
+### 6. Unleash the Ralph Loop
+Run the autonomous loop. Because the Sprite is isolated, you must invoke Ralph from the **Mothership** toolset.
 ```bash
 # Inside the container
 ~/mothership/ralph.sh 5
-
-# Or choose your blade
-~/mothership/ralph.sh 5 claude
 ```
-This runs 5 iterations of the **Tentacle Loop**, reading `SPEC.md` or the `specs/` directory from the current directory.
+This runs 5 iterations of the **Ralph Loop**, reading `SPEC.md` or the `specs/` directory from the current directory.
 
-## Architecture: Souls & Reapers
+## Architecture: Souls & Sprites
 
 The fleet is defined by these core components:
 
 *   **`souls/*.md`**: The personalities.
     *   **`killer.md`**: The ruthless implementer. High-velocity coding. "Safe YOLO Mode" enabled.
     *   **`architect.md`**: The planner. Doesn't write code, just specs.
-*   **`lsprite.sh`**: The bridge between the Host (Octopus) and the Cave (Docker).
-*   **`ralph.sh`**: The heartbeat loop that runs *inside* the Cave, driving the Tentacle.
-*   **`reap.sh`**: (Deprecated/Legacy) The host-side orchestrator for one-off strikes.
-
-## Key Files
-
-*   **`SPEC.md` (or `specs/`)**: The technical specification and requirements. The Tentacles read this to know what to build.
-*   **`progress.txt`**: The shared memory of what has been accomplished. **MANDATORY: APPEND ONLY.**
-*   **`IDEAS.md`**: The "Menu of Chaos" - architectural alternatives and future plans.
-*   **`NYX_SILICON_PIRATE_CAVE.md`**: The Tactical Briefing found inside every new Cave.
+*   **`lsprite.sh`**: The bridge between the Octopus and the Cave.
+*   **`ralph.sh`**: The heartbeat loop that runs *inside* the Cave, driving the Sprite.
 
 ## The Goal
-To have an agent-fleet expressed in code that has "sufficient behaviours to be useful."
+
+To have a Swarm expressed in code that has "sufficient behaviors to be useful."
+
 *   **Useful:** It produces working code via `ralph.sh`.
+
 *   **Expressed in Code:** The fleet is just `souls/` and bash scripts.
+
 *   **Sufficient:** It plans, codes, reviews, and commits.
+
+
 
 *"Sharpen the axe. Burn the logs. Build the future."*

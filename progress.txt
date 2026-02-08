@@ -64,3 +64,4 @@
 - [2026-02-04] Stabilized the Pulse: Switched default agent to `gemini-2.5-flash` and introduced `STRIKE_DELAY` in `ralph.sh` to mitigate 429 capacity exhaustion.
 - [2026-02-08] Breached the Hull: Updated `lsprite.sh` to expose port 3000 by default, enabling host-access to Sprite-hosted web services.
 - [2026-02-08] Forged the 'Submarine Boarding' protocol: Documented the use of `docker exec` with heredocs to create/modify specs inside Sprites when host-side root permissions block the Mothership.
+- [2026-02-08] The Lexicon Purge: Standardized the Swarm terminology in GLOSSARY.md and updated Mothership documentation to eliminate semantic drift.
