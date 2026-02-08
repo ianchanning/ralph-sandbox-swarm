@@ -24,17 +24,20 @@ Forge the base Docker image that all Sandboxes will use.
 ```
 
 ### 1. Summon a Sandbox (Identity)
-This single command spins up an isolated container, generates a unique **Identity** (e.g., 🦅 A), and uploads the SSH key to GitHub. 
+This single command spins up an isolated container, generates a unique **Identity** (e.g., 🦅 A), and SSH key. 
 ```bash
 ./sandbox.sh create
 ```
 *(Note the generated name in the output, e.g., "Generated Sandbox Name: scorpion-alpha")*
 
+This creates an ignored persistant storage at e.g. `/workspace-scorpion-alpha` within the repo.
+
 ### 2. Claim a Target (Project Clone)
-Tell the Identity which repository to work on. It will clone it into the isolated workspace. Note the final `.` to simplify the installation to the root of the workspace.
+Tell the Identity which repository to work on. It will clone it into the isolated workspace.  
 ```bash
 ./sandbox.sh clone scorpion-alpha git@github.com:ianchanning/kanban-rust-htmx.git .
 ```
+*(Note the final `.` to simplify the installation to the root of the workspace. A deployment key is added to the cloned repository)*
 
 ### 3. Jack In
 Enter the Sandbox. You will land in the `/workspace` containing your cloned project.
@@ -50,7 +53,13 @@ Run the autonomous heartbeat. Because the Identity is isolated, you must invoke 
 ```
 This runs 5 iterations of **Ralph**, reading `SPEC.md` or the `specs/` directory from the current directory.
 
-### 5. Setup the Sandbox (Creating a Template)
+### 5. Purge
+Delete the Sandbox. This will remove the container and delete the persistant storage directory at `/workspace-scorpion-alpha`.
+```bash
+./sandbox.sh purge scorpion-alpha
+```
+
+### 6. Setup the Sandbox (Creating a Template)
 If you've installed specialized tools (like Rust or Go) inside a Sandbox and want to preserve that environment for future use, you can **Save** it into a **Template**.
 
 Setup `'scorpion-alpha'` then save it into a new `'rust-template'`.
