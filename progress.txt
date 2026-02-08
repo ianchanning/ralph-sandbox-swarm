@@ -55,3 +55,12 @@
 - [2026-01-30] Forged the 'contexts/' vault and recorded 'ctx-001-octopus-infrastructure-hardened.md' as the first high-fidelity save point.
 - [2026-02-01] Nyx Awakened. Synchronized 'ralph.sh' with the 'SPEC.md'-first workflow standard.
 - [2026-02-01] Refined Mothership infrastructure: Aligned 'ralph.sh', 'README.md', and 'NYX_SILICON_PIRATE_CAVE.md' with the modular 'specs/' directory standard.
+- [2026-02-01] Hardened Sprite infrastructure: Added `procps` to `Dockerfile.sprite` to resolve `pgrep` errors and system utility gaps.
+- [2026-02-01] Shattered agent filesystem barriers: Updated `ralph.sh` to inject SOUL content directly into the prompt, bypassing path restrictions.
+- [2026-02-03] Forged the 'Lair' protocol: Implemented `lsprite.sh season` (commit to image) and updated `create` to support persistent project environments.
+- [2026-02-03] Enforced unique Cave identity: Refactored `init_sprite.sh` and `ralph.sh` to prevent Soul-leak and ensure correct Git attribution.
+- [2026-02-03] Introduced 'Pirate Sigils': Implemented emoji-based Git identities (e.g., 🐱 A) in `init_sprite.sh` for high-signal logs.
+- [2026-02-03] Bridged Mothership tools: Automated symlinking of `init_sprite.sh` inside Sprites to ensure they always run the latest hive-mind logic.
+- [2026-02-04] Stabilized the Pulse: Switched default agent to `gemini-2.5-flash` and introduced `STRIKE_DELAY` in `ralph.sh` to mitigate 429 capacity exhaustion.
+- [2026-02-08] Breached the Hull: Updated `lsprite.sh` to expose port 3000 by default, enabling host-access to Sprite-hosted web services.
+- [2026-02-08] Forged the 'Submarine Boarding' protocol: Documented the use of `docker exec` with heredocs to create/modify specs inside Sprites when host-side root permissions block the Mothership.
