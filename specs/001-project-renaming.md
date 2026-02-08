@@ -3,8 +3,8 @@
 **Objective:** Transition the entire project identity from `sprites-swarm` to `ralph-sandbox-swarm`.
 
 ## Phase 1: The Cloud Strike (GitHub Rename)
-- [ ] Execute `gh repo rename ralph-sandbox-swarm`.
-- [ ] Verify GitHub remote URL updates to `git@github.com:ianchanning/ralph-sandbox-swarm.git`.
+- [x] Execute `gh repo rename ralph-sandbox-swarm`.
+- [x] Verify GitHub remote URL updates to `git@github.com:ianchanning/ralph-sandbox-swarm.git`.
 
 ## Phase 2: The Physical Shift (Local Rename) [MANUAL]
 - [ ] Rename host directory from `~/Projects/sprites` to `~/Projects/ralph-sandbox-swarm`.
