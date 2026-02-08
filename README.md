@@ -2,7 +2,7 @@
 
 > "We are not building a factory of mindless robots; we are growing a Swarm of Chaos." - *Captain Nyx*
 
-This repository houses the **Ralph Sandbox Swarm**, a minimalist agent-fleet architecture expressed in code. It is designed to be useful, maintainable, and simple.
+This repository houses the **Ralph Sandbox Swarm**, a minimalist gemini/claude agent-fleet architecture expressed in code. It is designed to be useful, maintainable, and simple.
 
 ## Core Philosophy: The Host & The Sandbox
 
@@ -17,55 +17,51 @@ We reject the idea of "managing agents." Instead, we extend our consciousness.
 
 Follow these steps to spin up your own local Silicon Pirate Sandbox.
 
-### 1. Build the Golden Image
+### 0. Build the Golden Image
 Forge the base Docker image that all Sandboxes will use.
 ```bash
 ./sandbox.sh build
 ```
 
-### 2. Summon a Sandbox (Identity)
+### 1. Summon a Sandbox (Identity)
 This single command spins up an isolated container, generates a unique **Identity** (e.g., 🦅 A), and uploads the SSH key to GitHub. 
 ```bash
 ./sandbox.sh create
 ```
 *(Note the generated name in the output, e.g., "Generated Sandbox Name: scorpion-alpha")*
 
-### 3. Setup the Sandbox (Creating a Template)
-If you've installed specialized tools (like Rust or Go) inside a Sandbox and want to preserve that environment for future use, you can **Save** it into a **Template**.
-
-Setup `'scorpion-alpha'` then save it into a new `'rust-template'`
+### 2. Claim a Target (Project Clone)
+Tell the Identity which repository to work on. It will clone it into the isolated workspace. Note the final `.` to simplify the installation to the root of the workspace.
 ```bash
-./sandbox.sh save scorpion-alpha rust-template
+./sandbox.sh clone scorpion-alpha git@github.com:ianchanning/kanban-rust-htmx.git .
 ```
 
-Later, summon a new Sandbox directly into that Template
-```bash
-./sandbox.sh create rust-template
-```
-
-### 4. Claim a Target (Project Clone)
-Tell the Identity which repository to work on. It will clone it into the isolated workspace.
-```bash
-./sandbox.sh clone scorpion-alpha git@github.com:ianchanning/kanban-rust-htmx.git
-```
-
-### 5. Jack In
+### 3. Jack In
 Enter the Sandbox. You will land in the `/workspace` containing your cloned project.
 ```bash
 ./sandbox.sh in scorpion-alpha
 ```
 
-### 6. Unleash Ralph
-Run the autonomous heartbeat. Because the Identity is isolated, you must invoke Ralph from the **Mothership** toolset. Ralph supports both `gemini` (default) and `claude` CLI agents.
+### 4. Unleash Ralph
+Run the autonomous heartbeat. Because the Identity is isolated, you must invoke Ralph from the **Mothership** toolset. Ralph supports both `gemini` (**default**) and `claude` CLI agents.
 
 ```bash
-# Inside the container (defaults to gemini)
-~/mothership/ralph.sh 5
-
-# Or specify the agent
 ~/mothership/ralph.sh 5 claude
 ```
 This runs 5 iterations of **Ralph**, reading `SPEC.md` or the `specs/` directory from the current directory.
+
+### 5. Setup the Sandbox (Creating a Template)
+If you've installed specialized tools (like Rust or Go) inside a Sandbox and want to preserve that environment for future use, you can **Save** it into a **Template**.
+
+Setup `'scorpion-alpha'` then save it into a new `'rust-template'`.
+```bash
+./sandbox.sh save scorpion-alpha rust-template
+```
+
+Later, summon a new Sandbox directly into that Template.
+```bash
+./sandbox.sh create rust-template
+```
 
 ## Architecture: Personas & Identities
 
