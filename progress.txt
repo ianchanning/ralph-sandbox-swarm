@@ -69,3 +69,4 @@
 - [2026-02-08] Simplified Lexicon: Refined GLOSSARY.md and README.md to use 'Setup', 'Save', 'Progress', and explicitly 'Ralph'.
 - [2026-02-08] Industrial Grade Alignment: Renamed 'souls' to 'personas', 'season' to 'save-template', and transitioned 'Octopus' to 'Host' in documentation.
 - [2026-02-08] Terminal Brutality: Renamed 'save-template' to 'save' in lsprite.sh and synchronized all documentation.
+- [2026-02-08] The Grand Cleanup: Scuttled 'Project Reaper' legacy, moved non-essential docs to references/, and sanitized the Git index for local context files.
