@@ -1,2 +1,7 @@
 .aider*
 workspace-*
+# Agent context files (Mothership internals)
+AGENTS.md
+GEMINI.md
+.cursorrules
+CONVENTIONS.md

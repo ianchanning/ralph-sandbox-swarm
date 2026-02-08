@@ -1,8 +1,8 @@
-# The Host of Chaos: A Silicon Pirate Swarm
+# The Host of Chaos: A Swarm of Silicon Pirates
 
 > "We are not building a factory of mindless robots; we are growing a Swarm of Chaos." - *Captain Nyx*
 
-This repository houses the **Sprites Swarm** (aka Project Reaper), a minimalist agent-fleet architecture expressed in code. It is designed to be useful, maintainable, and brutally simple.
+This repository houses the **Sprites Swarm**, a minimalist agent-fleet architecture expressed in code. It is designed to be useful, maintainable, and brutally simple.
 
 ## Core Philosophy: The Host & The Sandbox
 
@@ -46,7 +46,7 @@ Tell the Sprite which repository to work on. It will clone it into the isolated 
 ./lsprite.sh clone scorpion-alpha git@github.com:ianchanning/kanban-rust-htmx.git
 ```
 
-### 5. Jack In (The Pirate Parley)
+### 5. Jack In
 Enter the Sandbox. You will land in the `/workspace` containing your cloned project.
 ```bash
 ./lsprite.sh in scorpion-alpha
@@ -65,8 +65,6 @@ This runs 5 iterations of **Ralph**, reading `SPEC.md` or the `specs/` directory
 The fleet is defined by these core components:
 
 *   **`personas/*.md`**: The Personas (System Prompts).
-    *   **`killer.md`**: The ruthless implementer. High-velocity coding. "Safe YOLO Mode" enabled.
-    *   **`architect.md`**: The planner. Doesn't write code, just specs.
 *   **`lsprite.sh`**: The bridge between the Host and the Sandbox.
 *   **`ralph.sh`**: The heartbeat loop that runs *inside* the Sandbox, driving the Sprite.
 
