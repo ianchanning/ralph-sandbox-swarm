@@ -58,4 +58,4 @@ The act of installing tools/dependencies inside a Sandbox to prepare it for work
 
 **Enshrining.**
 
-The command (`lsprite.sh save-template`) that saves a running Sandbox as a permanent **Template**.
+The command (`lsprite.sh save`) that saves a running Sandbox as a permanent **Template**.

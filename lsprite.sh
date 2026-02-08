@@ -129,10 +129,10 @@ case "$1" in
         inject_gemini_auth "$NAME"
     fi
     ;;
-  save-template)
+  save)
     NAME=$2
     TEMPLATE_NAME=$3
-    if [ -z "$NAME" ] || [ -z "$TEMPLATE_NAME" ]; then echo "Usage: $0 save-template <sandbox_name> <template_name>"; exit 1; fi
+    if [ -z "$NAME" ] || [ -z "$TEMPLATE_NAME" ]; then echo "Usage: $0 save <sandbox_name> <template_name>"; exit 1; fi
     echo "Saving Sandbox '$NAME' into a new template: '$TEMPLATE_NAME'..."
     # Preserve the label so it shows up in 'ls'
     $DOCKER_CMD commit --change 'LABEL org.nyx.sprite="true"' "$NAME" "$TEMPLATE_NAME"
@@ -232,8 +232,9 @@ case "$1" in
     
     $DOCKER_CMD exec "$NAME" bash -c "$GIT_CMD"
     ;;
-  *)
-    echo "Usage: $0 {build|create|up|in|rm|purge|ls|key|gh-key|clone|save-template}"
-    exit 1
-    ;;
-esac
+    *)
+      echo "Usage: $0 {build|create|up|in|rm|purge|ls|key|gh-key|clone|save}"
+      exit 1
+      ;;
+  esac
+  

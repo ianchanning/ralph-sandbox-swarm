@@ -34,7 +34,7 @@ This single command spins up an isolated container, generates a unique **Identit
 If you've installed specialized tools (like Rust or Go) inside a Sandbox and want to preserve that environment for future use, you can **Save** it into a **Template**.
 ```bash
 # Setup 'scorpion-alpha' then save it into a new 'rust-template'
-./lsprite.sh save-template scorpion-alpha rust-template
+./lsprite.sh save scorpion-alpha rust-template
 
 # Later, summon a new Sandbox directly into that Template
 ./lsprite.sh create rust-template
