@@ -14,6 +14,6 @@
 ```
 
 - **Host:** Your machine.
-- **Sandbox:** Docker (node LTS, claude, gemini, python, SSH key, unique git config, forward port 3000, persistent workspace storage).
+- **Sandbox:** Docker (node, claude, gemini, python, SSH key, git config, port 3000, persistent  storage).
 - **Identity:** Persona + Sandbox + Keys.
 - **Ralph:** The heartbeat loop.
