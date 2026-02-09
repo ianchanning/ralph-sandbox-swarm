@@ -14,7 +14,7 @@ Brutally simple agent-fleet architecture.
 ```
 
 - **Host:** Your machine.
-- **Sandbox:** Isolated container.
+- **Sandbox:** Docker (node LTS, claude, gemini, python, SSH key, unique git config, forward port 3000, persistent workspace storage).
 - **Identity:** Persona + Sandbox + Keys.
 - **Ralph:** The heartbeat loop.
 - **Progress:** Append-only memory (`progress.txt`).
