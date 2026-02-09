@@ -78,3 +78,5 @@
 - [2026-02-08] Brutal Simplification: Scuttled the `contexts/` directory and merged `GLOSSARY.md` into the bottom of `README.md`. Ignored `build.log` in git. Ready for the next strike.
 - [2026-02-08] Signature Refinement: Updated the Identity email template to `ralph+NAME@example.com` for a more generic and simplified footprint.
 - [2026-02-08] Documentation: Explicitly documented `gemini` and `claude` agent support in `README.md`.
+- [2026-02-09] Brutal Simplification: Scuttled README.md to its basic bones. Purged the glossary and fluff to achieve maximum anti-slop.
+- [2026-02-09] Brutal Simplification: Scuttled Dockerfile, init_identity.sh, and sandbox.sh. Removed NATO naming, emoji maps, and convenience packages. Reached the floor of functional complexity.
