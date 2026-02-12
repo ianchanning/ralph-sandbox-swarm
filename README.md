@@ -13,6 +13,14 @@
 ./sandbox.sh purge ID       # Scuttle
 ```
 
+**go → (ralph)**
+
+```bash
+./sandbox.sh build          # Forge Golden Image
+./sandbox.sh go URL         # Combines create + clone + in
+~/mothership/ralph.sh 1     # Unleash Ralph (inside)
+```
+
 - **Host:** Your machine.
 - **Sandbox:** Docker (node, claude, gemini, python, SSH key, git config, port 3000, persistent  storage).
 - **Identity:** Persona + Sandbox + Keys.

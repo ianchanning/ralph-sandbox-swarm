@@ -117,7 +117,7 @@ case "$1" in
     NAME=$($0 create)
 
     # 2. Add deploy key and clone the repository
-    $0 clone "$NAME" "$REPO_URL"
+    $0 clone "$NAME" "$REPO_URL" .
 
     # 3. Jump in
     echo "Entering Sandbox: $NAME" >&2
