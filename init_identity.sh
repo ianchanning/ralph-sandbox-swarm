@@ -59,7 +59,14 @@ else
     echo "   -> SSH Key already exists."
 fi
 
-# 5. Hand over control to the main command
+# 5. Inject API Keys into tool configurations
+if [ -n "$MOONSHOT_API_KEY" ] && [ -f "$HOME/.pi/agent/models.json" ]; then
+    echo "   -> Updating Moonshot API Key in Pi configuration..."
+    # Robustly replace the value of the apiKey field
+    sed -i 's/"apiKey": "[^"]*"/"apiKey": "'"$MOONSHOT_API_KEY"'"/g' "$HOME/.pi/agent/models.json"
+fi
+
+# 6. Hand over control to the main command
 if [ $# -gt 0 ]; then
     exec "$@"
 else

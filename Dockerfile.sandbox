@@ -25,11 +25,16 @@ RUN npm install -g npm@latest
 # We use ADD to fetch the latest version info from NPM, which busts the cache only when a new version is released
 ADD https://registry.npmjs.org/@google/gemini-cli/latest /tmp/gemini-version.json
 ADD https://registry.npmjs.org/@anthropic-ai/claude-code/latest /tmp/claude-version.json
-RUN npm install -g @google/gemini-cli @anthropic-ai/claude-code
+ADD https://registry.npmjs.org/@mariozechner/pi-coding-agent/latest /tmp/pi-version.json
+RUN npm install -g @google/gemini-cli @anthropic-ai/claude-code @mariozechner/pi-coding-agent
 
 # Pre-configure Gemini CLI settings
 RUN mkdir -p /root/.gemini && \
     echo '{"general": {"previewFeatures": true}, "security": {"auth": {"selectedType": "oauth-personal"}}}' > /root/.gemini/settings.json
+
+# Pre-configure Pi agent settings
+RUN mkdir -p /root/.pi/agent && \
+    echo '{"providers": {"moonshot": {"baseUrl": "https://api.moonshot.ai/v1", "api": "openai-completions", "apiKey": "MOONSHOT_API_KEY", "authHeader": true, "models": [{"id": "kimi-k2.5", "name": "Kimi K2.5 (Multimodal)", "reasoning": true, "input": ["text", "image"], "contextWindow": 128000, "maxTokens": 16384, "compat": {"maxTokensField": "max_completion_tokens", "supportsDeveloperRole": false, "supportsUsageInStreaming": true}}, {"id": "kimi-k2-turbo-preview", "name": "Kimi K2 Turbo", "reasoning": false, "input": ["text"], "contextWindow": 128000, "maxTokens": 16384, "compat": {"maxTokensField": "max_completion_tokens", "supportsDeveloperRole": false}}]}}}' > /root/.pi/agent/models.json
 
 # Set up a working directory
 WORKDIR /workspace
