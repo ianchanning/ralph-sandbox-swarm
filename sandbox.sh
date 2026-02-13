@@ -144,7 +144,7 @@ case "$1" in
         PORT=$(find_free_port)
         echo "Launching Sandbox: $NAME (from template: $TEMPLATE) on port $PORT"
         # Mount the dedicated workspace to /workspace and expose the allocated port
-        $DOCKER_CMD run -d --name "$NAME" --label org.nyx.sandbox=true -p $PORT:3000 \
+        $DOCKER_CMD run -d --name "$NAME" --hostname "$NAME" --label org.nyx.sandbox=true -p $PORT:3000 \
             -e IDENTITY_NAME="$NAME" \
             -e MOONSHOT_API_KEY="$MOONSHOT_API_KEY" \
             -e ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
